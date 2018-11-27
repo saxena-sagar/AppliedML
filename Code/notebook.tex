@@ -1,0 +1,747 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PersonalisedDrug}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{input\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{drugsComTrain\PYZus{}raw.tsv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sep} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}input\PYZus{}data.head(5)}
+        \PY{c+c1}{\PYZsh{} input\PYZus{}data.review[:2]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} !pip3 install nltk}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{import} \PY{n+nn}{nltk}
+        \PY{k+kn}{from} \PY{n+nn}{nltk}\PY{n+nn}{.}\PY{n+nn}{tokenize} \PY{k}{import} \PY{n}{word\PYZus{}tokenize}
+        
+        \PY{n}{male\PYZus{}comterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{has}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{son}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{husband}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{father}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{he}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{him}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{his}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}} \PY{p}{]} \PY{c+c1}{\PYZsh{}words in comments indicating male}
+        \PY{n}{male\PYZus{}diseaseterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prostate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{erectile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{penis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{penile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testicular}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testicle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{female\PYZus{}comterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daughter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wife}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mother}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{her}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{she}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{female\PYZus{}diseaseterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abortion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{breast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{birth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prenatal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postnatal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{contraception}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{contraceptive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vaginal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vagina}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovarian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCOS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} input\PYZus{}data.drop([\PYZsq{}sex\PYZsq{}],axis=1)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{label\PYZus{}sex}\PY{p}{(}\PY{n}{tokenized\PYZus{}words}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{any}\PY{p}{(}\PY{n}{elem} \PY{o+ow}{in} \PY{n}{tokenized\PYZus{}words} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{male\PYZus{}comterms}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male}\PY{l+s+s2}{\PYZdq{}}
+                \PY{k}{if} \PY{n+nb}{any}\PY{p}{(}\PY{n}{elem} \PY{o+ow}{in} \PY{n}{tokenized\PYZus{}words} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{male\PYZus{}diseaseterms}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male}\PY{l+s+s2}{\PYZdq{}}
+                \PY{k}{if} \PY{n+nb}{any}\PY{p}{(}\PY{n}{elem} \PY{o+ow}{in} \PY{n}{tokenized\PYZus{}words} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{female\PYZus{}comterms}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female}\PY{l+s+s2}{\PYZdq{}}
+                \PY{k}{if} \PY{n+nb}{any}\PY{p}{(}\PY{n}{elem} \PY{o+ow}{in} \PY{n}{tokenized\PYZus{}words} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{female\PYZus{}diseaseterms}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female}\PY{l+s+s2}{\PYZdq{}}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{None}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} input\PYZus{}data[\PYZdq{}sex\PYZdq{}] = np.where(label\PYZus{}sex(), \PYZsq{}Male\PYZsq{}, \PYZsq{}Female\PYZsq{})  }
+         \PY{c+c1}{\PYZsh{}     input\PYZus{}data.apply(lambda row: label\PYZus{}sex(row),axis=1)}
+         \PY{c+c1}{\PYZsh{}     input\PYZus{}data[\PYZdq{}sex\PYZdq{}] = np.where((elem in words for elem in male\PYZus{}comterms),\PYZdq{}FeMale\PYZdq{},\PYZdq{}male\PYZdq{})}
+         \PY{c+c1}{\PYZsh{}     if any(elem in words for elem in male\PYZus{}comterms):}
+         \PY{c+c1}{\PYZsh{}     words in male\PYZus{}comterms:}
+         \PY{c+c1}{\PYZsh{}         print(\PYZsq{}work\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}     input\PYZus{}data[\PYZdq{}sex\PYZdq{}] = }
+         \PY{c+c1}{\PYZsh{} for comment in input\PYZus{}data.review[:3]:}
+         \PY{c+c1}{\PYZsh{}     tokenized\PYZus{}words = word\PYZus{}tokenize(comment)}
+         \PY{c+c1}{\PYZsh{} input\PYZus{}data[\PYZdq{}sex\PYZdq{}] = np.where((elem in word\PYZus{}tokenize(comment) for comment in input\PYZus{}data.review[:3] for elem in male\PYZus{}comterms),\PYZdq{}Male\PYZdq{},\PYZdq{}Female\PYZdq{})}
+         \PY{n}{result} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{comment} \PY{o+ow}{in} \PY{n}{input\PYZus{}data}\PY{o}{.}\PY{n}{review}\PY{p}{:}
+             \PY{n}{words} \PY{o}{=} \PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{comment}\PY{p}{)}
+             \PY{n}{result}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{label\PYZus{}sex}\PY{p}{(}\PY{n}{words}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{df\PYZus{}result} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{result}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} result   np.in1d(df\PYZus{}result[\PYZdq{}Rvalue\PYZdq{}],\PYZsq{}True\PYZsq{})}
+         \PY{n}{input\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{input\PYZus{}data}\PY{p}{,}\PY{n}{df\PYZus{}result}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{input\PYZus{}data}
+         \PY{c+c1}{\PYZsh{} for x in np.nditer(result):}
+         \PY{c+c1}{\PYZsh{}     print(result)}
+         \PY{c+c1}{\PYZsh{} (x for x in np.nditer(result)}
+         \PY{c+c1}{\PYZsh{} df\PYZus{}result}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}         Unnamed: 0                            drugName  \textbackslash{}
+         0           206461                           Valsartan   
+         1            95260                          Guanfacine   
+         2            92703                              Lybrel   
+         3           138000                          Ortho Evra   
+         4            35696            Buprenorphine / naloxone   
+         5           155963                              Cialis   
+         6           165907                      Levonorgestrel   
+         7           102654                        Aripiprazole   
+         8            74811                              Keppra   
+         9            48928  Ethinyl estradiol / levonorgestrel   
+         10           29607                          Topiramate   
+         11           75612                      L-methylfolate   
+         12          191290                             Pentasa   
+         13          221320                    Dextromethorphan   
+         14           98494                           Nexplanon   
+         15           81890                         Liraglutide   
+         16           48188                        Trimethoprim   
+         17          219869                       Amitriptyline   
+         18          212077                         Lamotrigine   
+         19          119705                           Nilotinib   
+         20           12372                             Atripla   
+         21          231466                           Trazodone   
+         22          227020                        Etonogestrel   
+         23           41928                          Etanercept   
+         24          213649                         Tioconazole   
+         25           51215                        Azithromycin   
+         26          206180                        Eflornithine   
+         27           78563                            Daytrana   
+         28          132258                              Ativan   
+         29           27339                             Imitrex   
+         {\ldots}            {\ldots}                                 {\ldots}   
+         161267      181920                             Inderal   
+         161268       76151                              Portia   
+         161269       73058   Ethinyl estradiol / norethindrone   
+         161270      183202                            Cymbalta   
+         161271      148859                              Mirena   
+         161272       88991                           Singulair   
+         161273      109111                           Nexplanon   
+         161274      117030                         Synvisc-One   
+         161275      161838                       Ciprofloxacin   
+         161276      176146                           Lorazepam   
+         161277       18421                            Zolpidem   
+         161278       86533                            Invokana   
+         161279       56907                 Roxicodone Intensol   
+         161280      183962                         Hydroxyzine   
+         161281       52489                      Armour Thyroid   
+         161282      229036                           Tadalafil   
+         161283      228492                              Geodon   
+         161284      121154                         Venlafaxine   
+         161285      200957                         Alcaftadine   
+         161286       93069                        Vortioxetine   
+         161287      132177                              Ativan   
+         161288       45410                          Fluoxetine   
+         161289      105263                       Carbamazepine   
+         161290      103458                            Tekturna   
+         161291      164345                      Junel 1.5 / 30   
+         161292      191035                             Campral   
+         161293      127085                      Metoclopramide   
+         161294      187382                             Orencia   
+         161295       47128                  Thyroid desiccated   
+         161296      215220                        Lubiprostone   
+         
+                                    condition  \textbackslash{}
+         0       Left Ventricular Dysfunction   
+         1                               ADHD   
+         2                      Birth Control   
+         3                      Birth Control   
+         4                  Opiate Dependence   
+         5       Benign Prostatic Hyperplasia   
+         6            Emergency Contraception   
+         7                    Bipolar Disorde   
+         8                           Epilepsy   
+         9                      Birth Control   
+         10               Migraine Prevention   
+         11                        Depression   
+         12                   Crohn's Disease   
+         13                             Cough   
+         14                     Birth Control   
+         15                           Obesity   
+         16           Urinary Tract Infection   
+         17                       ibromyalgia   
+         18                   Bipolar Disorde   
+         19      Chronic Myelogenous Leukemia   
+         20                     HIV Infection   
+         21                          Insomnia   
+         22                     Birth Control   
+         23              Rheumatoid Arthritis   
+         24           Vaginal Yeast Infection   
+         25               Chlamydia Infection   
+         26                         Hirsutism   
+         27                              ADHD   
+         28                     Panic Disorde   
+         29                          Migraine   
+         {\ldots}                              {\ldots}   
+         161267       Ventricular Tachycardia   
+         161268                 Birth Control   
+         161269                 Birth Control   
+         161270                       Anxiety   
+         161271                 Birth Control   
+         161272                        Asthma   
+         161273                 Birth Control   
+         161274                Osteoarthritis   
+         161275             Bladder Infection   
+         161276                       Anxiety   
+         161277                      Insomnia   
+         161278              Diabetes, Type 2   
+         161279                  Chronic Pain   
+         161280                      Sedation   
+         161281           Underactive Thyroid   
+         161282          Erectile Dysfunction   
+         161283               Bipolar Disorde   
+         161284                 Panic Disorde   
+         161285      Conjunctivitis, Allergic   
+         161286                    Depression   
+         161287                       Anxiety   
+         161288  Obsessive Compulsive Disorde   
+         161289          Trigeminal Neuralgia   
+         161290           High Blood Pressure   
+         161291                 Birth Control   
+         161292            Alcohol Dependence   
+         161293               Nausea/Vomiting   
+         161294          Rheumatoid Arthritis   
+         161295           Underactive Thyroid   
+         161296         Constipation, Chronic   
+         
+                                                            review  rating  \textbackslash{}
+         0       "It has no side effect, I take it in combinati{\ldots}     9.0   
+         1       "My son is halfway through his fourth week of {\ldots}     8.0   
+         2       "I used to take another oral contraceptive, wh{\ldots}     5.0   
+         3       "This is my first time using any form of birth{\ldots}     8.0   
+         4       "Suboxone has completely turned my life around{\ldots}     9.0   
+         5       "2nd day on 5mg started to work with rock hard{\ldots}     2.0   
+         6       "He pulled out, but he cummed a bit in me. I t{\ldots}     1.0   
+         7       "Abilify changed my life. There is hope. I was{\ldots}    10.0   
+         8       " I Ve had  nothing but problems with the Kepp{\ldots}     1.0   
+         9       "I had been on the pill for many years. When m{\ldots}     8.0   
+         10      "I have been on this medication almost two wee{\ldots}     9.0   
+         11      "I have taken anti-depressants for years, with{\ldots}    10.0   
+         12      "I had Crohn\&\#039;s with a resection 30 years {\ldots}     4.0   
+         13      "Have a little bit of a lingering cough from a{\ldots}     4.0   
+         14      "Started Nexplanon 2 months ago because I have{\ldots}     3.0   
+         15      "I have been taking Saxenda since July 2016.  {\ldots}     9.0   
+         16      "This drug worked very well for me and cleared{\ldots}     9.0   
+         17      "I\&\#039;ve been taking amitriptyline since Jan{\ldots}     9.0   
+         18      "I\&\#039;ve been on every medicine under the su{\ldots}    10.0   
+         19      "I have been on Tasigna for just over 3 years {\ldots}    10.0   
+         20      "Spring of 2008 I was hospitalized with pnuemo{\ldots}     8.0   
+         21      "I have insomnia, it\&\#039;s horrible. My story{\ldots}    10.0   
+         22      "Nexplanon does its job. I can have worry free{\ldots}     9.0   
+         23      "I live in Western Australia and disturbed by {\ldots}    10.0   
+         24      "Do not use the cream that comes with this. It{\ldots}     1.0   
+         25      "Was prescribed one dose over the course of on{\ldots}     7.0   
+         26      "I\&\#039;m writing a second review on Vaniqa.  {\ldots}    10.0   
+         27      "Hi all, My son who is 12 was diagnosed when h{\ldots}    10.0   
+         28      "Honestly, I have been taking ativan for 2 yea{\ldots}     6.0   
+         29      "At first I suffered through them. This includ{\ldots}     8.0   
+         {\ldots}                                                   {\ldots}     {\ldots}   
+         161267  "Doc prescribed this medication to control my {\ldots}     3.0   
+         161268  "I switched to Portia 12 days ago when I start{\ldots}     1.0   
+         161269  "When I first starting taking Lo Loestrin Fe, {\ldots}    10.0   
+         161270  "I have been taking Cymbalta for 15 months now{\ldots}     9.0   
+         161271  "My experience: Painful insertion but I expect{\ldots}    10.0   
+         161272  "This really did help with my allergies and as{\ldots}     5.0   
+         161273  "I have had the Nexplanon since Dec. 27, 2016 {\ldots}     6.0   
+         161274  "I need bi-lateral knee replacement but due to{\ldots}     2.0   
+         161275  "POISON{\ldots}two days on this med \&amp; I though{\ldots}     1.0   
+         161276  "About 4 years ago I started having early-morn{\ldots}     8.0   
+         161277  "I started taking this medication 10 years ago{\ldots}    10.0   
+         161278  "I just got diagnosed with type 2. My doctor p{\ldots}     9.0   
+         161279  "Used with my throat cancer and it helped numb{\ldots}    10.0   
+         161280  "Honestly , This works pretty well for me. It {\ldots}    10.0   
+         161281  "Had taken Armour Thyroid for 20 years but sta{\ldots}     1.0   
+         161282  "I\&\#039;m a 59 year old male who has experienc{\ldots}     9.0   
+         161283  "I was in a very bad place at the time I start{\ldots}     3.0   
+         161284  "Had panic attacks and social anxiety starting{\ldots}     9.0   
+         161285  "Used this a month ago for allergic conjunctiv{\ldots}     1.0   
+         161286  "This is the third med I\&\#039;ve tried for anx{\ldots}     2.0   
+         161287  "I was super against taking medication. I\&\#039{\ldots}     9.0   
+         161288  "I have been off Prozac for about 4 weeks now{\ldots}     8.0   
+         161289  "Up to 800mg seems to work about once every 2n{\ldots}     1.0   
+         161290  "I have only been on Tekturna for 9 days. The {\ldots}     7.0   
+         161291  "This would be my second month on Junel. I\&\#03{\ldots}     6.0   
+         161292  "I wrote my first report in Mid-October of 201{\ldots}    10.0   
+         161293  "I was given this in IV before surgey. I immed{\ldots}     1.0   
+         161294  "Limited improvement after 4 months, developed{\ldots}     2.0   
+         161295  "I\&\#039;ve been on thyroid medication 49 years{\ldots}    10.0   
+         161296  "I\&\#039;ve had chronic constipation all my adu{\ldots}     9.0   
+         
+                               date  usefulCount     sex  
+         0             May 20, 2012           27    Male  
+         1           April 27, 2010          192    Male  
+         2        December 14, 2009           17  Female  
+         3         November 3, 2015           10  Female  
+         4        November 27, 2016           37    Male  
+         5        November 28, 2015           43    None  
+         6            March 7, 2017            5    Male  
+         7           March 14, 2015           32    None  
+         8           August 9, 2016           11    None  
+         9         December 8, 2016            1  Female  
+         10         January 1, 2015           19    None  
+         11           March 9, 2017           54    None  
+         12            July 6, 2013            8    None  
+         13       September 7, 2017            1    None  
+         14          August 7, 2014           10  Female  
+         15        January 19, 2017           20    Male  
+         16      September 22, 2017            0    None  
+         17          March 15, 2017           39    None  
+         18        November 9, 2014           18    None  
+         19       September 1, 2015           11    None  
+         20            July 9, 2010           11    None  
+         21           April 3, 2016           43    Male  
+         22         August 11, 2014           11  Female  
+         23      September 16, 2017            4    Male  
+         24          April 17, 2017            7    None  
+         25       December 14, 2015            7    Male  
+         26            May 11, 2014           99    Male  
+         27        January 12, 2017           11    Male  
+         28            June 1, 2015           47    None  
+         29        October 16, 2012            6    None  
+         {\ldots}                    {\ldots}          {\ldots}     {\ldots}  
+         161267    January 23, 2014            6    None  
+         161268    January 28, 2014            9  Female  
+         161269      April 20, 2015           13  Female  
+         161270       June 10, 2013           89    Male  
+         161271    January 26, 2016            4  Female  
+         161272  September 21, 2012           36    None  
+         161273       April 6, 2017            0    Male  
+         161274      April 27, 2017           11    None  
+         161275   November 28, 2017            1    None  
+         161276   November 21, 2017            0  Female  
+         161277   November 16, 2008          103    None  
+         161278    October 23, 2015           47    None  
+         161279     August 16, 2016           22    None  
+         161280  September 13, 2017            8    None  
+         161281    January 31, 2016           87    None  
+         161282   November 22, 2014           36    Male  
+         161283       July 25, 2016            5    None  
+         161284   November 10, 2016           25    None  
+         161285  September 21, 2014           12    None  
+         161286       July 17, 2016           33    None  
+         161287     August 16, 2016           61    None  
+         161288    January 21, 2015           22    Male  
+         161289    January 31, 2016           10    None  
+         161290    February 7, 2010           18    None  
+         161291        May 27, 2015            0  Female  
+         161292        May 31, 2015          125    Male  
+         161293    November 1, 2011           34    None  
+         161294      March 15, 2014           35    None  
+         161295  September 19, 2015           79  Female  
+         161296   December 13, 2014          116    None  
+         
+         [161297 rows x 8 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C:}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Users}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Guest1}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{Desktop}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{ML Project}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{drugsComTrain\PYZus{}raw.tsv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{engine}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}df = df.drop(df.columns[[0]], axis=1)}
+        \PY{c+c1}{\PYZsh{}df = df.dropna(axis=0, how=\PYZsq{}any\PYZsq{}, thresh=None, subset=None, inplace=False)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}1 star reviews}
+        \PY{n}{rating\PYZus{}1} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{1.0}
+        \PY{c+c1}{\PYZsh{}print(rating\PYZus{}1.head()) \PYZsh{}shows boolean value for if rating is 1}
+        \PY{n}{df\PYZus{}r1} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}1}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{}print(df\PYZus{}r1.shape) \PYZsh{}21619 rows}
+        \PY{c+c1}{\PYZsh{}print(df\PYZus{}r1.head())}
+        
+        \PY{n}{rating\PYZus{}2} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{2.0}
+        \PY{n}{df\PYZus{}r2} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}2}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}3} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{3.0}
+        \PY{n}{df\PYZus{}r3} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}3}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}4} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{4.0}
+        \PY{n}{df\PYZus{}r4} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}4}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}5} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{5.0}
+        \PY{n}{df\PYZus{}r5} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}5}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}6} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{6.0}
+        \PY{n}{df\PYZus{}r6} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}6}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}7} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{7.0}
+        \PY{n}{df\PYZus{}r7} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}7}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}8}\PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{8.0}
+        \PY{n}{df\PYZus{}r8} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}8}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}9} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{9.0}
+        \PY{n}{df\PYZus{}r9} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}9}\PY{p}{]}
+        
+        \PY{n}{rating\PYZus{}10} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mf}{10.0}
+        \PY{n}{df\PYZus{}r10} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{rating\PYZus{}10}\PY{p}{]}
+        
+        \PY{n}{rate\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r2}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r3}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r4}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r5}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r6}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r7}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r8}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r9}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r10}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ids} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{uniqueids} \PY{o}{=} \PY{n}{ids}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{uniqueids}\PY{p}{)}
+        
+        \PY{n}{rating\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{:} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r2}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r3}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r4}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r5}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r6}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r7}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r8}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r9}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}r10}\PY{p}{)}\PY{p}{\PYZcb{}}
+        \PY{n}{ratingdf} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{rating\PYZus{}dict}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{date} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}
+        \PY{n}{df}\PY{p}{[}\PY{n}{date}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{date}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} from sklearn.decomposition import PCA}
+        \PY{c+c1}{\PYZsh{} pca = PCA(n\PYZus{}components=5)}
+        \PY{c+c1}{\PYZsh{} pca.fit(df)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{conditions} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+        \PY{n}{uniquecond} \PY{o}{=} \PY{n}{conditions}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{uniquecond}\PY{p}{)} \PY{c+c1}{\PYZsh{}884 dif conditions}
+        
+        \PY{n}{grouped} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{condition}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{grouped}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}list(df.condition.value\PYZus{}counts())}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{drugs} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{uniquedrug} \PY{o}{=} \PY{n}{drugs}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{uniquedrug}\PY{p}{)} \PY{c+c1}{\PYZsh{}3431 dif drugs}
+        
+        \PY{n}{grouped\PYZus{}drug} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drugName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{grouped\PYZus{}drug}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+        \PY{n}{druglist} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{drugName}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{grouped\PYZus{}drug}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}max(druglist)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{male\PYZus{}comterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{son}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{husband}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{father}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{he}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{him}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{his}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}} \PY{p}{]} \PY{c+c1}{\PYZsh{}words in comments indicating male}
+        \PY{n}{male\PYZus{}diseaseterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prostate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{erectile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{penis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{penile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testicular}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{testicle}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{female\PYZus{}comterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daughter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wife}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mother}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{her}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{she}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{female\PYZus{}diseaseterms} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abortion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{breast}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{birth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{prenatal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postnatal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{contraception}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vaginal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vagina}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ovarian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PCOS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        
+        \PY{c+c1}{\PYZsh{}list(df)}
+        
+        \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{review}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{o}{.}\PY{n}{to\PYZus{}string}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{review}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{p}{[}\PY{n}{string} \PY{k}{for} \PY{n}{string} \PY{o+ow}{in} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{review}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{male\PYZus{}comterms}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o+ow}{in} \PY{n}{string}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} \PYZsh{} df[\PYZdq{}sex\PYZdq{}] = np.where(df[\PYZdq{}review\PYZdq{}].isin(male\PYZus{}comterms),\PYZdq{}Male\PYZdq{},\PYZdq{}Female\PYZdq{})}
+        \PY{c+c1}{\PYZsh{} \PYZsh{} df[\PYZdq{}review\PYZdq{}].str.match(lambda x: male\PYZus{}comterms[x])}
+        \PY{c+c1}{\PYZsh{} \PYZsh{} (male\PYZus{}comterms)}
+        \PY{c+c1}{\PYZsh{} \PYZsh{} print(males.shape)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
